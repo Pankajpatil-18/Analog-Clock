@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+</head>
+
+<style>
+        
+
+    body{
+    background: #0f3854;
+    background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
+    background-size: 0.5%;
+}
+
+.clock{
+    width: 300px;
+    height: 300px;
+    border-radius: 150%;
+    background-color: rgb(195, 31, 87);
+    margin: 100px auto 0px auto;
+    position: relative;
+    border:20px solid #bd5c03;
+
+}
+.center{
+    background-color: #000;
+    position: absolute;
+    left: calc(50% - 10px);
+    top:  calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 20;
+}
+
+.center:hover{
+    background-color: #ffa200;
+    border: #0f3854;
+}
+.hourHand{
+    width: 10px;
+    height: 75px;
+    background-color: #000;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    position: absolute;
+    top: 75px;
+    left: 145px;
+    z-index: 10;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+      transform: rotate(360deg);
+
+}
+.minuteHand{
+    width: 5px;
+    height: 120px;
+    background-color: #000;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    left: 147px;
+    z-index: 9;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+      transform: rotate(90deg);
+
+}
+.secondHand{
+    width: 2px;
+    height: 120px;
+    background-color:black;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    left: 149px;
+    transition: all 0.06s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    z-index: 8;  
+      transform: rotate(360deg);
+
+}
+.time{
+    position: absolute;
+    top: 45%;
+    left: 10%;
+    border: 1px solid #fff8dc;
+    background-color: #fff;
+    padding: 5px;
+    display: block;
+    box-shadow: inset 0px 2px 5px rgba(0,0,0,.4);
+    border-radius: 5px;
+    min-width: 70px;
+    height: 15px;
+
+}
+.day{
+    position: absolute;
+    top: 45%;
+    left: 63%;
+    border: 1px solid #fff8dc;
+    background-color: #fff;
+    padding: 5px;
+    display: block;
+    box-shadow: inset 0px 2px 5px rgba(0,0,0,.4);
+    border-radius: 5px;
+    min-width: 70px;
+    height: 15px;
+
+}
+.country{
+    position:absolute;
+    top: 16%;
+    left: 45%;
+}
+.time small{
+    color:rgb(4, 4, 4);
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.sh{
+    position:absolute;
+    top: 23%;
+    left: 39%;
+    display:none;
+}
+
+.clock ul{
+    list-style: none;
+    padding: 0;
+
+}
+.clock ul li{
+    position: absolute;
+    width:20px;
+    height:20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 10px;
+    color:rgb(5, 4, 4);
+}
+.clock ul li:nth-child(1){
+    right: 22%;
+    top:6.5%;
+    font-size: 20px;
+}
+.clock ul li:nth-child(2){
+    right: 6%;
+    top:25%;
+    font-size: 20px;
+}
+.clock ul li:nth-child(3){
+    right: 1%;
+    top:calc(50% - 10px);
+    color:#000;
+    font-size: 20px;
+    font-weight: bold;
+}
+.clock ul li:nth-child(4){
+    right: 6%;
+    top:69%;
+    font-size: 20px;
+}
+.clock ul li:nth-child(5){
+    right: 22%;
+    top:84%;
+    font-size: 20px;
+}
+.clock ul li:nth-child(6){
+    right: calc(50% - 10px);
+    top:calc(99% - 20px);
+    color:#000;
+    font-size: 20px;
+    font-weight: bold;
+}
+.clock ul li:nth-child(7){
+    left: 22%;
+    top:84%;
+    font-size: 20px;
+}
+.clock ul li:nth-child(8){
+    left: 6%;
+    top:69%;
+    font-size: 20px;
+}
+.clock ul li:nth-child(9){
+    left: 1%;
+    top:calc(50% - 10px);
+    color:#000;
+    font-size: 20px;
+    font-weight: bold;
+}
+.clock ul li:nth-child(10){
+    left: 6%;
+    top:25%;
+    font-size: 20px;
+}
+.clock ul li:nth-child(11){
+    left: 22%;
+    top:6.5%;
+    font-size: 20px;
+}
+.clock ul li:nth-child(12){
+    right: calc(50% - 10px);
+    top:1%;
+    color:#000;
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+<script>
+    window.onload = function() {
+
+const hourHand = document.querySelector('.hourHand');
+    const minuteHand = document.querySelector('.minuteHand');
+    const secondHand = document.querySelector('.secondHand');
+    const time = document.querySelector('.time');
+    const clock = document.querySelector('.clock');
+    const day=document.querySelector('.day');
+    const sh=document.querySelector('.sh');
+    
+
+    function setDate(){
+        const arr=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        const today = new Date();
+        
+        const second = today.getSeconds();
+        const d=today.getDay();
+        const secondDeg = ((second / 60) * 360) + 360; 
+        secondHand.style.transform = `rotate(${secondDeg}deg)`;
+        
+        const minute = today.getMinutes();
+        const minuteDeg = ((minute / 60) * 360); 
+        minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+
+        const hour = today.getHours();
+        const hourDeg = ((hour / 12 ) * 360 ); 
+        hourHand.style.transform = `rotate(${hourDeg}deg)`;
+        
+        time.innerHTML = '<span>' + '<strong>' + hour + '</strong>' + ' : '+'<strong>' + minute + '</strong>'+' : ' + '<strong>' + second +'<strong>'+ '</span>';
+        day.innerHTML='<strong>'+arr[d]+'</strong>';
+        
+        day.addEventListener('mouseover',function show()
+        {
+            sh.innerHTML='<strong>'+arr[d]+'</strong>';
+            sh.style.display='block';
+        })
+        day.addEventListener('mouseout',function show()
+        {
+            sh.innerHTML='<strong>'+arr[d]+'</strong>';
+            sh.style.display='none';
+        })
+        
+        time.addEventListener('mouseover',function show()
+        {
+            sh.innerHTML='<span>' + '<strong>' + hour + '</strong>' + ' : '+'<strong>' + minute + '</strong>'+' : ' + '<strong>' + second +'<strong>'+ '</span>';
+            sh.style.display='block';
+        })
+        time.addEventListener('mouseout',function show()
+        {
+            sh.innerHTML='<span>' + '<strong>' + hour + '</strong>' + ' : '+'<strong>' + minute + '</strong>'+' : ' + '<strong>' + second +'<strong>'+ '</span>';
+            sh.style.display='none';
+        })
+
+        hourHand.addEventListener('mouseover',function A(){
+            hourHand.style.display="none";
+            hourHand.style.cursor='pointer';
+        })
+        hourHand.addEventListener('mouseout',function A(){
+            hourHand.style.display="block";
+        })    
+
+        minuteHand.addEventListener('mouseover',function A(){
+            minuteHand.style.display="none";
+            minuteHand.style.cursor='pointer';
+        })
+        minuteHand.addEventListener('mouseout',function A(){
+            minuteHand.style.display="block";
+        })    
+        }
+    setInterval(setDate, 1000);
+}
+</script>
+<body>
+    
+    <div class="clock">
+        <div class="hourHand"></div>
+        <div class="minuteHand"></div>
+        <div class="secondHand"></div>
+        <div class="center"></div>
+        <div class="time"></div>
+        <div class="day"></div>
+        <div class="country">India</div>
+        <div class="sh"></div>
+        <ul>
+            <li><span>1</span></li>
+            <li><span>2</span></li>
+            <li><span>3</span></li>
+            <li><span>4</span></li>
+            <li><span>5</span></li>
+            <li><span>6</span></li>
+            <li><span>7</span></li>
+            <li><span>8</span></li>
+            <li><span>9</span></li>
+            <li><span>10</span></li>
+            <li><span>11</span></li>
+            <li><span>12</span></li>
+        </ul>
+    </div>
+</body>
+</html>
